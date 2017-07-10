@@ -39,6 +39,7 @@ composer install
 * Поля данных, которые необходимо вернуть: id, model, year, mileage, license_number, price
 * Пример возвращаемых данных: 
 {"id":1,"model":"Mercedes C-Classe","year":"2012","mileage":"86154","license_number":"AB1234","price":50}
+* В случае запроса информации по авто с отсутствующим id необходимо вернуть error response с заголовком 404
 
 ##### Задание 3
 
@@ -48,4 +49,3 @@ composer install
 * Тип возвращаемых данных: JSON
 * Поля данных, которые необходимо вернуть для списка авто: id, model, year, price
 * Поля данных, которые необходимо вернуть для вывода информации определенного авто: id, model, year, mileage, license_number, price
-

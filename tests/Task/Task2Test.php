@@ -6,21 +6,23 @@
 class Task2Test extends \Tests\TestCase
 {
 
+    const ENDPOINT = '/api/cars';
+
     public function testStatus()
     {
-        $response = $this->get('/api/cars/1');
+        $response =  $this->json('GET', self::ENDPOINT . '/1');
         $response->assertStatus(200);
     }
 
     public function testHeader()
     {
-        $response = $this->get('/api/cars/1');
+        $response =  $this->json('GET', self::ENDPOINT . '/1');
         $response->assertHeader('Content-Type', 'application/json');
     }
 
     public function testStructure()
     {
-        $response = $this->get('/api/cars/1');
+        $response =  $this->json('GET', self::ENDPOINT . '/1');
         $response->assertJsonStructure([
             'id',
             'model',
@@ -33,22 +35,22 @@ class Task2Test extends \Tests\TestCase
 
     public function testNotExistingId()
     {
-        $response = $this->get('/api/cars/99999999');
+        $response =  $this->json('GET', self::ENDPOINT . '/99999999');
         $response->assertStatus(404);
     }
 
     public function testUnecessaryRoutes()
     {
-        $response = $this->post('/api/cars/1');
+        $response =  $this->json('POST', self::ENDPOINT . '/1');
         $response->assertStatus(405);
 
-        $response = $this->delete('/api/cars/1');
+        $response =  $this->json('DELETE', self::ENDPOINT . '/1');
         $response->assertStatus(405);
 
-        $response = $this->patch('/api/cars/1');
+        $response =  $this->json('PATCH', self::ENDPOINT . '/1');
         $response->assertStatus(405);
 
-        $response = $this->put('/api/cars/1');
+        $response =  $this->json('PUT', self::ENDPOINT . '/1');
         $response->assertStatus(405);
     }
 }

@@ -6,21 +6,23 @@
 class Task1Test extends \Tests\TestCase
 {
 
+    const ENDPOINT = '/api/cars';
+
     public function testStatus()
     {
-        $response = $this->get('/api/cars');
+        $response =  $this->json('GET', self::ENDPOINT);
         $response->assertStatus(200);
     }
 
     public function testHeader()
     {
-        $response = $this->get('/api/cars');
+        $response =  $this->json('GET', self::ENDPOINT);
         $response->assertHeader('Content-Type', 'application/json');
     }
 
     public function testStructure()
     {
-        $response = $this->get('/api/cars');
+        $response =  $this->json('GET', self::ENDPOINT);
         $response->assertJsonStructure([
             [
                 'id',
@@ -33,16 +35,16 @@ class Task1Test extends \Tests\TestCase
 
     public function testUnecessaryRoutes()
     {
-        $response = $this->post('/api/cars');
+        $response =  $this->json('POST', self::ENDPOINT);
         $response->assertStatus(405);
 
-        $response = $this->delete('/api/cars');
+        $response =  $this->json('DELETE', self::ENDPOINT);
         $response->assertStatus(405);
 
-        $response = $this->patch('/api/cars');
+        $response =  $this->json('PATCH', self::ENDPOINT);
         $response->assertStatus(405);
 
-        $response = $this->put('/api/cars');
+        $response =  $this->json('PUT', self::ENDPOINT);
         $response->assertStatus(405);
     }
 }

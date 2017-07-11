@@ -6,9 +6,11 @@
 class Task3Test extends \Tests\TestCase
 {
 
+    const ENDPOINT = '/api/admin/cars';
+
     public function testIndex()
     {
-        $response = $this->get('/api/admin/cars');
+        $response =  $this->json('GET', self::ENDPOINT);
         $response->assertStatus(200);
         $response->assertHeader('Content-Type', 'application/json');
 
@@ -24,7 +26,7 @@ class Task3Test extends \Tests\TestCase
 
     public function testShow()
     {
-        $response = $this->get('/api/admin/cars/1');
+        $response =  $this->json('GET', self::ENDPOINT . '/1');
         $response->assertStatus(200);
         $response->assertHeader('Content-Type', 'application/json');
 
@@ -48,7 +50,7 @@ class Task3Test extends \Tests\TestCase
             'price' => 55
         ];
 
-        $response = $this->post('/api/admin/cars', $storeData);
+        $response =  $this->json('POST', self::ENDPOINT, $storeData);
         $response->assertStatus(200);
         $response->assertHeader('Content-Type', 'application/json');
 
@@ -62,7 +64,7 @@ class Task3Test extends \Tests\TestCase
             'price' => 58
         ];
 
-        $response = $this->patch('/api/admin/cars/1', $storeData);
+        $response =  $this->json('PATCH', self::ENDPOINT . '/1', $storeData);
         $response->assertStatus(200);
         $response->assertHeader('Content-Type', 'application/json');
 
@@ -71,7 +73,7 @@ class Task3Test extends \Tests\TestCase
 
     public function testDestroy()
     {
-        $response = $this->delete('/api/admin/cars/1');
+        $response =  $this->json('DELETE', self::ENDPOINT . '/1');
         $response->assertStatus(200);
     }
 }

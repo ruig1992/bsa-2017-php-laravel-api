@@ -64,6 +64,7 @@ class Task3Test extends \Tests\TestCase
     {
         $storeData = [
             'model' => 'VW Passat B8',
+            'color' => 'Black',
             'year' => '2014',
             'mileage' => 68456,
             'registration_number' => 'VW2014',

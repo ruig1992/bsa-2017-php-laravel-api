@@ -21,6 +21,7 @@ class CarRepository extends AbstractRepository implements CarRepositoryInterface
             'model' => 'Mercedes C-Classe',
             'color' => 'White',
             'registration_number' => 'MB1234',
+            'mileage' => 102568,
             'year' => '2012',
             'price' => 50,
         ], [
@@ -28,6 +29,7 @@ class CarRepository extends AbstractRepository implements CarRepositoryInterface
             'model' => 'Hyundai Elantra',
             'color' => 'Silver',
             'registration_number' => 'HE3214',
+            'mileage' => 45856,
             'year' => '2015',
             'price' => 30,
         ], [
@@ -35,6 +37,7 @@ class CarRepository extends AbstractRepository implements CarRepositoryInterface
             'model' => 'Skoda Octavia',
             'color' => 'Blue',
             'registration_number' => 'SO1342',
+            'mileage' => 75821,
             'year' => '2013',
             'price' => 35,
         ], [
@@ -42,6 +45,7 @@ class CarRepository extends AbstractRepository implements CarRepositoryInterface
             'model' => 'BMW Series 7',
             'color' => 'Black',
             'registration_number' => 'BMW789',
+            'mileage' => 125522,
             'year' => '2010',
             'price' => 60,
         ]

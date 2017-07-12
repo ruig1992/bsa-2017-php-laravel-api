@@ -45,6 +45,20 @@ class CarController extends Controller
         return response()->json($data);
     }
 
-    public function show(int $id)
-    {}
+    /**
+     * Get and show the detailed information about the car by its id
+     * @param int $id
+     * @return Response
+     */
+    public function show(int $id): Response
+    {
+        $car = $this->carsRepository->getById($id);
+
+        if ($car === null) {
+            return response()->json([
+                'message' => "The car with ID #$id not found",
+            ], 404);
+        }
+        return response()->json($car);
+    }
 }

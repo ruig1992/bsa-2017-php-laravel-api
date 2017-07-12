@@ -33,6 +33,44 @@ class Task1Test extends \Tests\TestCase
         ]);
     }
 
+    public function testContent()
+    {
+        $response =  $this->json('GET', self::ENDPOINT);
+        $this->assertCount(4, $response->json());
+
+        $response->assertExactJson([
+            [
+                'id' => 1,
+                'model' => 'Mercedes C-Classe',
+                'color' => 'White',
+                'license_number' => 'MB1234',
+                'year' => '2012',
+                'price' => 50
+            ], [
+                'id' => 2,
+                'model' => 'Hyundai Elantra',
+                'color' => 'Silver',
+                'license_number' => 'HE3214',
+                'year' => '2015',
+                'price' => 30
+            ], [
+                'id' => 3,
+                'model' => 'Skoda Octavia',
+                'color' => 'Blue',
+                'license_number' => 'SO1342',
+                'year' => '2013',
+                'price' => 35
+            ], [
+                'id' => 4,
+                'model' => 'BMW Series 7',
+                'color' => 'Black',
+                'license_number' => 'BMW789',
+                'year' => '2010',
+                'price' => 60
+            ]
+        ]);
+    }
+
     public function testUnecessaryRoutes()
     {
         $response =  $this->json('POST', self::ENDPOINT);

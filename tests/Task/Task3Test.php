@@ -14,29 +14,52 @@ class Task3Test extends \Tests\TestCase
         $response->assertStatus(200);
         $response->assertHeader('Content-Type', 'application/json');
 
-        $response->assertJsonStructure([
-            'id',
-            'model',
-            'year',
-            'mileage',
-            'registration_number',
-            'price'
+        $response->assertExactJson([
+            [
+                'id' => 1,
+                'model' => 'Mercedes C-Classe',
+                'color' => 'White',
+                'license_number' => 'MB1234',
+                'year' => '2012',
+                'price' => 50
+            ], [
+                'id' => 2,
+                'model' => 'Hyundai Elantra',
+                'color' => 'Silver',
+                'license_number' => 'HE3214',
+                'year' => '2015',
+                'price' => 30
+            ], [
+                'id' => 3,
+                'model' => 'Skoda Octavia',
+                'color' => 'Blue',
+                'license_number' => 'SO1342',
+                'year' => '2013',
+                'price' => 35
+            ], [
+                'id' => 4,
+                'model' => 'BMW Series 7',
+                'color' => 'Black',
+                'license_number' => 'BMW789',
+                'year' => '2010',
+                'price' => 60
+            ]
         ]);
     }
 
     public function testShow()
     {
-        $response =  $this->json('GET', self::ENDPOINT . '/1');
+        $response =  $this->json('GET', self::ENDPOINT . '/2');
         $response->assertStatus(200);
         $response->assertHeader('Content-Type', 'application/json');
 
-        $response->assertJsonStructure([
-            'id',
-            'model',
-            'year',
-            'mileage',
-            'registration_number',
-            'price'
+        $response->assertExactJson([
+            'id' => 2,
+            'model' => 'Hyundai Elantra',
+            'color' => 'Silver',
+            'license_number' => 'HE3214',
+            'year' => '2015',
+            'price' => 30
         ]);
     }
 

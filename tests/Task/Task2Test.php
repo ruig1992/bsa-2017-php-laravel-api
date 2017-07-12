@@ -20,16 +20,16 @@ class Task2Test extends \Tests\TestCase
         $response->assertHeader('Content-Type', 'application/json');
     }
 
-    public function testStructure()
+    public function testContent()
     {
         $response =  $this->json('GET', self::ENDPOINT . '/1');
-        $response->assertJsonStructure([
-            'id',
-            'model',
-            'year',
-            'mileage',
-            'registration_number',
-            'price'
+        $response->assertExactJson([
+            'id' => 1,
+            'model' => 'Mercedes C-Classe',
+            'color' => 'White',
+            'license_number' => 'MB1234',
+            'year' => '2012',
+            'price' => 50,
         ]);
     }
 

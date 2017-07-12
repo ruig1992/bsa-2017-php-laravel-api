@@ -88,9 +88,11 @@ class CarController extends Controller
      */
     public function update(Request $request, int $id): JsonResponse
     {
+        // No need to update the id
+        $request->offsetUnset('id');
         $storeData = $request->toArray();
-        $car = $this->carsRepository->getById($id);
 
+        $car = $this->carsRepository->getById($id);
         if ($car === null) {
             return response()->json([
                 'message' => "The car with ID #$id not found",

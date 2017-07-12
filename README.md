@@ -30,7 +30,7 @@ composer install
 * Формат возвращаемых данных: JSON
 * Поля данных для каждого из автомобилей: id, model, year, color, price
 * Пример возвращаемых данных: 
-[{"id":1,"model":"Mercedes C-Classe","color":"White","registration_number":"MB1234","year":"2012","price":50},{"id":2,"model":"Hyundai Elantra","color":"Silver","registration_number":"HE3214","year":"2015","price":30}
+[{"id":1,"model":"Mercedes C-Classe","color":"White","year":"2012","price":50},{"id":2,"model":"Hyundai Elantra","color":"Silver","year":"2015","price":30}
 
 ##### Задание 2
 
@@ -38,7 +38,7 @@ composer install
 * Route: /api/cars/{id}
 * Тип HTTP запроса: только GET
 * Формат возвращаемых данных: JSON
-* Поля данных, которые необходимо вернуть: id, model, year, mileage, license_number, price
+* Поля данных, которые необходимо вернуть: id, model, color, year, mileage, registration_number, price
 * Пример возвращаемых данных: 
 {"id":1,"model":"Mercedes C-Classe","color":"White","registration_number":"MB1234","year":"2012","mileage":"86154","price":50}
 * В случае запроса информации по авто с отсутствующим id необходимо вернуть error response с заголовком 404

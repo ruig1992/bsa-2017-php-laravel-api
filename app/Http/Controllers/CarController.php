@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Http\JsonResponse;
 
 use App\Helpers\CarDataHelper;
 use App\Repositories\Contracts\CarRepositoryInterface;
@@ -28,9 +28,9 @@ class CarController extends Controller
 
     /**
      * Get and show the list of all cars with certain data fields
-     * @return Response
+     * @return JsonResponse
      */
-    public function index(): Response
+    public function index(): JsonResponse
     {
         $data = [];
         foreach ($this->carsRepository->getAll() as $car) {
@@ -48,9 +48,9 @@ class CarController extends Controller
     /**
      * Get and show the detailed information about the car by its id
      * @param int $id
-     * @return Response
+     * @return JsonResponse
      */
-    public function show(int $id): Response
+    public function show(int $id): JsonResponse
     {
         $car = $this->carsRepository->getById($id);
 

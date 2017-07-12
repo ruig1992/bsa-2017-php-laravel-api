@@ -19,6 +19,8 @@ composer install
 
 #### Задания
 
+Для выполнения заданий необходимо заинжектить репозиторий App\Repositories\CarRepository.php в контроллер и все манипуляции с данными проводить с помощью него.
+
 
 ##### Задание 1
 
@@ -26,9 +28,9 @@ composer install
 * Route: /api/cars
 * Тип HTTP запроса: только GET
 * Формат возвращаемых данных: JSON
-* Поля данных для каждого из автомобилей: id, model, year, price
+* Поля данных для каждого из автомобилей: id, model, year, color, price
 * Пример возвращаемых данных: 
-[{"id":1,"model":"Mercedes C-Classe","year":"2012","price":50},{"id":2,"model":"Hyundai Elantra","year":"2015","price":30},{"id":3,"model":"Skoda Octavia","year":"2013","price":35},{"id":4,"model":"BMW Series 7","year":"2010","price":60}]
+[{"id":1,"model":"Mercedes C-Classe","color":"White","year":"2012","price":50},{"id":2,"model":"Hyundai Elantra","color":"Silver","year":"2015","price":30}
 
 ##### Задание 2
 
@@ -36,9 +38,9 @@ composer install
 * Route: /api/cars/{id}
 * Тип HTTP запроса: только GET
 * Формат возвращаемых данных: JSON
-* Поля данных, которые необходимо вернуть: id, model, year, mileage, license_number, price
+* Поля данных, которые необходимо вернуть: id, model, color, year, mileage, registration_number, price
 * Пример возвращаемых данных: 
-{"id":1,"model":"Mercedes C-Classe","year":"2012","mileage":"86154","registration_number":"AB1234","price":50}
+{"id":1,"model":"Mercedes C-Classe","color":"White","registration_number":"MB1234","year":"2012","mileage":"86154","price":50}
 * В случае запроса информации по авто с отсутствующим id необходимо вернуть error response с заголовком 404
 
 ##### Задание 3
@@ -47,5 +49,5 @@ composer install
 * Route prefix: /api/admin/cars/
 * Действия, которые может совершать администратор: просмотр всех авто, просмотр информации об определенном авто, добавление, обновление информации, удаление
 * Формат входных и возвращаемых данных: JSON
-* Поля данных, которые необходимо вернуть для списка авто: id, model, year, price
-* Поля данных, которые необходимо вернуть для вывода информации определенного авто: id, model, year, mileage, registration_number, price
+* Поля данных, которые необходимо вернуть для списка авто: id, model, color, year, price
+* Поля данных, которые необходимо вернуть для вывода информации определенного авто: id, model, year, color, mileage, registration_number, price

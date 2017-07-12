@@ -48,7 +48,7 @@ class CarController extends Controller
     }
 
     /**
-     * Store a newly created car in repository
+     * Store a newly created car in the repository
      *
      * @param  Request $request
      * @return JsonResponse
@@ -81,7 +81,7 @@ class CarController extends Controller
     }
 
     /**
-     * Update the specified resource in storage
+     * Update the specified car in the repository
      *
      * @param  Request $request
      * @return JsonResponse
@@ -104,7 +104,7 @@ class CarController extends Controller
     }
 
     /**
-     * Remove the specified car from repository
+     * Remove the specified car from the repository
      *
      * @param  int $id
      * @return Response

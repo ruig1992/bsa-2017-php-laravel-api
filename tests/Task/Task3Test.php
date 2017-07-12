@@ -53,7 +53,7 @@ class Task3Test extends \Tests\TestCase
             'id' => 2,
             'model' => 'Hyundai Elantra',
             'color' => 'Silver',
-            'license_number' => 'HE3214',
+            'registration_number' => 'HE3214',
             'year' => '2015',
             'price' => 30
         ]);

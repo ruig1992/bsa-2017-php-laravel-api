@@ -26,8 +26,24 @@ class CarController extends Controller
         $this->carsRepository = $carsRepository;
     }
 
-    public function index()
-    {}
+    /**
+     * Get and show the list of all cars with certain data fields
+     * @return Response
+     */
+    public function index(): Response
+    {
+        $data = [];
+        foreach ($this->carsRepository->getAll() as $car) {
+            $data[] = $this->getDataByFields($car, [
+                'id',
+                'model',
+                'color',
+                'year',
+                'price',
+            ]);
+        }
+        return response()->json($data);
+    }
 
     public function show(int $id)
     {}

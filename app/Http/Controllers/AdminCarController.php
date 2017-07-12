@@ -2,64 +2,124 @@
 
 namespace App\Http\Controllers;
 
-use App\Car;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
+
+use App\Car;
+use App\Helpers\CarDataHelper;
+use App\Repositories\Contracts\CarRepositoryInterface;
 
 class AdminCarController extends Controller
 {
+    use CarDataHelper;
+
     /**
-     * Display a listing of the resource.
-     *
-     * @return JsonResponse
+     * Cars repository
+     * @var CarRepositoryInterface
      */
-    public function index()
+    protected $carsRepository;
+
+    /**
+     * @param CarRepositoryInterface $carsRepository
+     */
+    public function __construct(CarRepositoryInterface $carsRepository)
     {
-        //
+        $this->carsRepository = $carsRepository;
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Get and show the list of all cars with certain data fields
+     *
+     * @return JsonResponse
+     */
+    public function index(): JsonResponse
+    {
+        $data = [];
+        foreach ($this->carsRepository->getAll() as $car) {
+            $data[] = $this->getDataByFields($car, [
+                'id',
+                'model',
+                'color',
+                'year',
+                'price',
+            ]);
+        }
+        return response()->json($data);
+    }
+
+    /**
+     * Store a newly created car in repository
      *
      * @param  Request $request
      * @return JsonResponse
      */
-    public function store(Request $request)
+    public function store(Request $request): JsonResponse
     {
-        //
+        $storeData = $request->toArray();
+        $car = new Car($storeData);
+        $newData = $this->carsRepository->store($car);
+
+        return response()->json($newData);
     }
 
     /**
-     * Display the specified resource.
+     * Get and show the detailed information about the car by its id
      *
-     * @param  Car $car
+     * @param int $id
      * @return JsonResponse
      */
-    public function show(Car $car)
+    public function show(int $id): JsonResponse
     {
-        //
+        $car = $this->carsRepository->getById($id);
+
+        if ($car === null) {
+            return response()->json([
+                'message' => "The car with ID #$id not found",
+            ], 404);
+        }
+        return response()->json($car);
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified resource in storage
      *
      * @param  Request $request
-     * @param  Car $car
      * @return JsonResponse
      */
-    public function update(Request $request, Car $car)
+    public function update(Request $request, int $id): JsonResponse
     {
-        //
+        $storeData = $request->toArray();
+        $car = $this->carsRepository->getById($id);
+
+        if ($car === null) {
+            return response()->json([
+                'message' => "The car with ID #$id not found",
+            ], 404);
+        }
+
+        $car->fromArray($storeData);
+        $data = $this->carsRepository->update($car);
+
+        return response()->json($data);
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified car from repository
      *
-     * @param  Car $car
-     * @return JsonResponse
+     * @param  int $id
+     * @return Response
      */
-    public function destroy(Car $car)
+    public function destroy(int $id): Response
     {
-        //
+        $oldCount = count($this->carsRepository->getAll());
+        $newCount = count($this->carsRepository->delete($id));
+
+        if ($newCount === $oldCount) {
+            return response()->json([
+                'message' => "The car with ID #$id doesn't exist",
+            ], 404);
+        }
+        return response('Ok', 200);
     }
 }

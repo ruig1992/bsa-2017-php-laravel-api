@@ -24,9 +24,11 @@
         <testsuite name="task1">
             <directory suffix="Test.php">./tests/Task/Task1Test.php</directory>
         </testsuite>
-
         <testsuite name="task2">
             <directory suffix="Test.php">./tests/Task/Task2Test.php</directory>
+        </testsuite>
+        <testsuite name="task3">
+            <directory suffix="Test.php">./tests/Task/Task3Test.php</directory>
         </testsuite>
     </testsuites>
     <filter>

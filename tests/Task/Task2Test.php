@@ -27,7 +27,7 @@ class Task2Test extends \Tests\TestCase
             'id' => 1,
             'model' => 'Mercedes C-Classe',
             'color' => 'White',
-            'license_number' => 'MB1234',
+            'registration_number' => 'MB1234',
             'year' => '2012',
             'price' => 50,
         ]);

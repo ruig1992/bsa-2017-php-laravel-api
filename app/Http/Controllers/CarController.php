@@ -55,7 +55,14 @@ class CarController extends Controller
      */
     public function store(Request $request): JsonResponse
     {
-        $storeData = $request->toArray();
+        $storeData = $request->only([
+            'model',
+            'year',
+            'mileage',
+            'registration_number',
+            'color',
+            'price',
+        ]);
         $car = new Car($storeData);
         $newData = $this->carsRepository->store($car);
 
@@ -88,9 +95,14 @@ class CarController extends Controller
      */
     public function update(Request $request, int $id): JsonResponse
     {
-        // No need to update the id
-        $request->offsetUnset('id');
-        $storeData = $request->toArray();
+        $storeData = $request->only([
+            'model',
+            'year',
+            'mileage',
+            'registration_number',
+            'color',
+            'price',
+        ]);
 
         $car = $this->carsRepository->getById($id);
         if ($car === null) {

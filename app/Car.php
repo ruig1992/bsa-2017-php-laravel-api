@@ -14,20 +14,9 @@ class Car extends AbstractEntity implements Arrayable
     protected $color;
     protected $price;
 
-    protected $fillable = [
-        'id',
-        'model',
-        'year',
-        'mileage',
-        'registration_number',
-        'color',
-        'price'
-    ];
+    protected $fillable = ['id', 'model', 'year', 'mileage', 'registration_number', 'color', 'price'];
 
-    /**
-     * @param array $data
-     */
-    public function __construct(array $data)
+    public function __construct(array $data = null)
     {
         return $this->fromArray($data);
     }
@@ -159,30 +148,19 @@ class Car extends AbstractEntity implements Arrayable
     }
 
     /**
-     * @param array|null $fields
      * @return array
      */
-    public function toArray(array $fields = null): array
+    public function toArray()
     {
-        if (empty($fields)) {
-            $fields = $this->fillable;
-        }
-
-        $fields = array_flip($fields);
-        $data = [];
-
-        foreach ($this->fillable as $field) {
-            $method = 'get' . camel_case($field);
-
-            if (array_has($fields, $field)) {
-                $data[$field] = $this->$method();
-                continue;
-            }
-            if (array_has($fields, snake_case($field))) {
-                $data[snake_case($field)] = $this->$method();
-            }
-        }
-
-        return $data;
+        return [
+            'id' => $this->getId(),
+            'model' => $this->getModel(),
+            'year' => $this->getYear(),
+            'mileage' => $this->getMileage(),
+            'registration_number' => $this->getRegistrationNumber(),
+            'color' => $this->getColor(),
+            'price' => $this->getPrice()
+        ];
     }
+
 }

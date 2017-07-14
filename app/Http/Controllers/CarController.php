@@ -32,17 +32,17 @@ class CarController extends Controller
      */
     public function index(): JsonResponse
     {
-        $fields = array_flip([
+        $fields = [
             'id',
             'model',
             'year',
             'color',
             'price',
-        ]);
+        ];
         $data = [];
 
         foreach ($this->carsRepository->getAll() as $car) {
-            $data[] = array_intersect_key($car->toArray(), $fields);
+            $data[] = array_only($car->toArray(), $fields);
         }
         return response()->json($data);
     }

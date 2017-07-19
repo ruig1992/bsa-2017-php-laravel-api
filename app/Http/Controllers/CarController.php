@@ -1,14 +1,14 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
-use Symfony\Component\HttpFoundation\Response;
-
-use App\Car;
 use App\Repositories\Contracts\CarRepositoryInterface;
 
+/**
+ * Class CarController
+ * @package App\Http\Controllers
+ */
 class CarController extends Controller
 {
     /**
@@ -48,29 +48,7 @@ class CarController extends Controller
     }
 
     /**
-     * Store a newly created car in the repository
-     *
-     * @param  Request $request
-     * @return JsonResponse
-     */
-    public function store(Request $request): JsonResponse
-    {
-        $storeData = $request->only([
-            'model',
-            'year',
-            'mileage',
-            'registration_number',
-            'color',
-            'price',
-        ]);
-        $car = new Car($storeData);
-        $newData = $this->carsRepository->store($car);
-
-        return response()->json($newData);
-    }
-
-    /**
-     * Get and show the detailed information about the car by its id
+     * Get and show the full information about the car by its id
      *
      * @param int $id
      * @return JsonResponse
@@ -85,54 +63,5 @@ class CarController extends Controller
             ], 404);
         }
         return response()->json($car);
-    }
-
-    /**
-     * Update the specified car in the repository
-     *
-     * @param  Request $request
-     * @return JsonResponse
-     */
-    public function update(Request $request, int $id): JsonResponse
-    {
-        $storeData = $request->only([
-            'model',
-            'year',
-            'mileage',
-            'registration_number',
-            'color',
-            'price',
-        ]);
-
-        $car = $this->carsRepository->getById($id);
-        if ($car === null) {
-            return response()->json([
-                'message' => "The car with ID #$id not found",
-            ], 404);
-        }
-
-        $car->fromArray($storeData);
-        $data = $this->carsRepository->update($car);
-
-        return response()->json($data);
-    }
-
-    /**
-     * Remove the specified car from the repository
-     *
-     * @param  int $id
-     * @return Response
-     */
-    public function destroy(int $id): Response
-    {
-        $oldCount = count($this->carsRepository->getAll());
-        $newCount = count($this->carsRepository->delete($id));
-
-        if ($newCount === $oldCount) {
-            return response()->json([
-                'message' => "The car with ID #$id doesn't exist",
-            ], 404);
-        }
-        return response('Ok', 200);
     }
 }

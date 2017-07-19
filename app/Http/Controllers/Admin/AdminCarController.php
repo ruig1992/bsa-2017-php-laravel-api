@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 use App\Car;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use App\Http\Controllers\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use App\Repositories\Contracts\CarRepositoryInterface;
 
